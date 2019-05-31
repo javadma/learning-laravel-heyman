@@ -12,16 +12,6 @@
 */
 
 
-use Imanghafoori\HeyMan\Facades\HeyMan;
-
-HeyMan::whenYouHitRouteName('panel.admin')
-    ->youShouldBeLoggedIn()
-    ->otherwise()
-    ->redirect()->to('/welcome');
-HeyMan::whenYouVisitUrl('/user/panel')
-    ->youShouldBeLoggedIn()
-    ->otherwise()
-    ->response()->json(['msg' => 'what do you do here'], 404);
 
 
 Route::view('/welcome', 'welcome');

@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Imanghafoori\HeyMan\Facades\HeyMan;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -25,6 +26,20 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        $this->authenticate();
+    }
+
+    private function authenticate()
+    {
+        HeyMan::whenYouHitRouteName('panel.admin')
+            ->youShouldBeLoggedIn()
+            ->otherwise()
+            ->redirect()->to('/welcome');
+        HeyMan::whenYouVisitUrl('/user/panel')
+            ->youShouldBeLoggedIn()
+            ->otherwise()
+            ->response()->json(['msg' => 'what do you do here'], 404);
+
+
     }
 }
