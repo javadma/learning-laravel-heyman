@@ -2,7 +2,8 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\Facades\Gate;
+use App\Http\Responses\Errors;
+use App\Loggers\Logger;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Imanghafoori\HeyMan\Facades\HeyMan;
 
@@ -34,7 +35,8 @@ class AuthServiceProvider extends ServiceProvider
         HeyMan::whenYouHitRouteName('panel.admin')
             ->youShouldBeLoggedIn()
             ->otherwise()
-            ->redirect()->to('/welcome');
+            ->afterCalling(Logger::class . '@logGuestAccess')
+            ->weRespondFrom(Errors::class . '@toWelcomePage');
         HeyMan::whenYouVisitUrl('/user/panel')
             ->youShouldBeLoggedIn()
             ->otherwise()

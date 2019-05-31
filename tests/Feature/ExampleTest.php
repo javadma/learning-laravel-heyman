@@ -2,8 +2,8 @@
 
 namespace Tests\Feature;
 
+use Illuminate\Support\Facades\Log;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class ExampleTest extends TestCase
 {
@@ -14,6 +14,9 @@ class ExampleTest extends TestCase
      */
     public function testBasicTest()
     {
+        Log::shouldReceive('info')
+            ->once()
+            ->with('some one want to sneak in');
         $response = $this->get('/admin/panel');
 
         $response->assertRedirect('/welcome');
