@@ -24,6 +24,16 @@ class ExampleTest extends TestCase
 
     public function testAuthenticateUserPanel()
     {
+        Log::shouldReceive('info')
+            ->once()
+            ->with('some one want to sneak in');
+        $response = $this->get('/admin/panel');
+
+        $response->assertRedirect('/welcome');
+    }
+
+    public function _testAuthenticateUserPanel()
+    {
         $response = $this->get('/user/panel');
         $response->assertExactJson([
             'msg' => 'what do you do here'
