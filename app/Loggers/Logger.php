@@ -12,6 +12,6 @@ class Logger
 
     public function longOperation()
     {
-        sleep(13);
+        \Log::info('some one want to sneak in' . time());
     }
 }
