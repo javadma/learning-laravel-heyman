@@ -42,7 +42,7 @@ class AuthServiceProvider extends ServiceProvider
             ->youShouldBeLoggedIn()
             ->otherwise()
 //            ->afterCalling(Logger::class.'@longOperation')
-            ->response()->json(['msg' => 'what do you do here'], 404)
+            ->response()->view('welcome')
             ->then()->terminateWith(Logger::class . '@longOperation');
 
     }
