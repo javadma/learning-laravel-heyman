@@ -9,4 +9,9 @@ class Logger
     {
         \Log::info('some one want to sneak in');
     }
+
+    public function longOperation()
+    {
+        sleep(13);
+    }
 }

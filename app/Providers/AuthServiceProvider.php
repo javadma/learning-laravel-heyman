@@ -37,11 +37,13 @@ class AuthServiceProvider extends ServiceProvider
             ->otherwise()
             ->afterCalling(Logger::class . '@logGuestAccess')
             ->weRespondFrom(Errors::class . '@toWelcomePage');
-        /* HeyMan::whenYouVisitUrl('/user/panel')
-             ->youShouldBeLoggedIn()
-             ->otherwise()
-             ->response()->json(['msg' => 'what do you do here'], 404);
 
- */
+        HeyMan::whenYouVisitUrl('/user/panel')
+            ->youShouldBeLoggedIn()
+            ->otherwise()
+//            ->afterCalling(Logger::class.'@longOperation')
+            ->response()->json(['msg' => 'what do you do here'], 404)
+            ->then()->terminateWith(Logger::class . '@longOperation');
+
     }
 }
