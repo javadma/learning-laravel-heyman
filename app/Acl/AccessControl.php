@@ -7,6 +7,8 @@ class AccessControl
 {
     public function beAdmin()
     {
-        return auth()->check() && auth()->user()->is_admin == true;
+        return function () {
+            auth()->check() && auth()->user()->is_admin == true;
+        };
     }
 }

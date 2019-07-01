@@ -42,7 +42,7 @@ class AuthServiceProvider extends ServiceProvider
     {
         HeyMan::whenYouHitRouteName('panel.admin')
             ->youShouldBeLoggedIn()
-            ->youShouldBeAdmin()
+//            ->youShouldBeAdmin()
             ->otherwise()
             ->afterCalling(Logger::class . '@logGuestAccess')
             ->weRespondFrom(Errors::class . '@toWelcomePage');
