@@ -10,5 +10,6 @@ class AccessControl
         return function () {
             auth()->check() && auth()->user()->is_admin == true;
         };
+
     }
 }
